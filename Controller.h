@@ -3,23 +3,24 @@
 
 #include <string>
 #include <iostream>
-#include "Game.h"
-class Game;
+//#include "Game.h"
+// class Game;
 
 class Controller {
-	Game* game;
+//	Game* game;
 	public:
 		Controller();
 		~Controller();
 		void init();
 		void play();
-		void loadFile(string fileName);
+		void loadFile(std::string fileName);
 		void createPlayer();
+		void startNewGame();
 		void newFloor();
 		void notify(int row, int col, char c);
-		void printStatus(string msg);
+		void printStatus(std::string msg);
 		void restart();
 		void quit();
-}
+};
 
 #endif
