@@ -8,13 +8,13 @@
 
 class Controller {
 //	Game* game;
-	string fileName;
+	std::string fileName;
 	public:
 		Controller();
 		~Controller();
 		void init();
 		void play();
-		void loadFile(std::string fileName);
+		void loadFloor(std::string fileName);
 		void createPlayer();
 		void startGame();
 		void newFloor();

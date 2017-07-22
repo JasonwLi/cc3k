@@ -48,7 +48,7 @@ void Controller::loadFloor(string floorFile) {
 	if(file.is_open()) {
 		for(int i=0;i<level*row;i++) {
 			//loop through floorPlan until it gets to the right level
-			getline(floorPlan, temp);
+			getline(file, line);
 		}
 
 		for(int j=0;j<row;j++) {
@@ -131,7 +131,7 @@ void Controller::restart() {
 //	game->createFloor();//create floor on the game
 }
 
-void checkEnemiesH(PPlayer* pc, Enemy** allEnemies) {
+void checkEnemiesHP(Player* pc, Enemy** allEnemies) {
 	for(int i=0;i<20;i++) {
 		Enemy* enemy = allEnemies[i];
 		if(enemy && enemy->getHP() == 0) {
