@@ -2,7 +2,7 @@
 #include "Tile.h"
 #include <iostream>
 
-Tile:Tile(): row(0), column(0), ch(' '), chamber(0){
+Tile::Tile(): row(0), column(0), ch(' '), chamber(0){
     for(int j = 0; j < 8; j++){
         neighbours[j] = NULL;
     }
@@ -28,11 +28,11 @@ void Tile::getCh(){
     return ch;
 }
 
-int getChamber(){
+int Tile::getChamber(){
     return chamberNum;
 }
 
-void notify(int row, int col, char ch){
+void Tile::notify(int row, int col, char ch){
     game->notify(row, column, ch);
 }
 
