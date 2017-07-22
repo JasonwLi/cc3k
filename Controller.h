@@ -8,6 +8,7 @@
 
 class Controller {
 //	Game* game;
+	string fileName;
 	public:
 		Controller();
 		~Controller();
@@ -15,12 +16,11 @@ class Controller {
 		void play();
 		void loadFile(std::string fileName);
 		void createPlayer();
-		void startNewGame();
+		void startGame();
 		void newFloor();
 		void notify(int row, int col, char c);
 		void printStatus(std::string msg);
 		void restart();
-		void quit();
 };
 
 #endif

@@ -17,11 +17,10 @@ int main(int argc, char* argv[]) {
 		controller.init();
 		if(argc > 1) {
 			//load floor from a file
-			controller.loadFile(argv[1]);
-		} else {
-			//start a new game
-			controller.startNewGame();
-		}
+			controller.loadFloor(argv[1]);
+		} 
+		//start the game
+		controller.startGame();
 	} else {
 		cout << "Usage: ./cc3k [filename] [seed]" << endl;
 	}
