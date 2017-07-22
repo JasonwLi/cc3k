@@ -118,9 +118,43 @@ void Controller::notify(int row, int col, char c) {
 //	td->notify(row, col, c);
 }
 
+void printSpaces(int total) {
+	for(int i=0;i<total;i++) {
+		cout << " ";
+	}
+}
+
 void Controller::printStatus(string msg) {
 	cout << "controller print status"<<endl;
+	Player* pc = game->getPC(); //get the current player of the game
+	string level = to_string(game->getLevel()); //get current floor level
 
+	//default values to be printed
+	string Race = "";
+	string Gold = "0";
+	string HP = "0";
+	string Atk = "0";
+	string Def = "0";
+	string Action = "";
+
+	if(pc) { //if player exists
+		Race = pc->getRace();
+		Gold = to_string(pc->getGold());
+		HP = to_string(pc->getHP());
+		Atk = to_string(pc->getAtk());
+		Def = to_string(pc->getDef());
+	}
+
+	//display/print status of the player in the game
+	cout << "Race: " << Race << " Gold: " << Gold;
+	printSpaces(50);
+	cout << "Floor "<< level << endl;
+	cout << "HP: " << HP << endl;
+	cout << "Atk: " << Atk << endl;
+	cout << "Def: " << Def << endl;
+	cout << "Action: " << msg << endl;
+
+	return;
 }
 
 void Controller::restart() {
