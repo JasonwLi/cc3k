@@ -190,11 +190,13 @@ void Controller::play() {
 			cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw") {
 			//direction
 			string moveResult = pc->movePlayer(cmd); //move player with direction
-			if(moveResult == "moved") {
+			if(moveResult != "moved") {
 				//move but nothing special
+				msg += moveResult + cmd + ".";
+				continue;
 			} else if(isdigit(moveResult[0])) {
 				//move and pick up gold
-				msg += "You moved to "+cmd+" and tou found "+moveResult+" golds.";
+				msg += "You moved to "+cmd+" and you found "+moveResult+" golds.";
 			} else if(moveResult == "nextLevel") {
 				//up to the next level
 				if(game->getLevel() == 5) {
@@ -228,6 +230,8 @@ void Controller::play() {
 						loadFloor(fileName);
 					}
 				}
+			} else {
+				msg += moveResult + cmd + ".";
 			}
 
 		} else if(cmd == "f") {
@@ -338,6 +342,7 @@ void Controller::play() {
 							counter++;
 						}
 					}
+					allEnemies[i]->clearAttack();
 				}
 			}
 		}
