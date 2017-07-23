@@ -37,10 +37,14 @@ Game::~Game(){
 }
 
 Tile* Game::getRandTile(){
-    int x = rand()%row;
-    int y = rand()%column;
-    Tile *t = getTile(x,y);
-    return t;
+    while(true){
+        int x = rand()%row;
+        int y = rand()%column;
+        Tile *t = getTile(x,y);
+        if(isValidTile(t)){
+            return t;
+        }
+    }
 }
     
     
@@ -64,7 +68,7 @@ void Game::createPC(){
     int c = rngGen(5);
     while(true){
         Tile *tile = getRandTile();
-        if(isValidTile(tile)){
+        if(tile->getChamber == c){
             break;
         }
     }
@@ -75,7 +79,7 @@ void Game::createPC(){
 void Game::createStair(){
     while(true){
         Tile *tile = getRandTile();
-        if(isValidTile(tile) && pc->getLocation()->getChamber != tile->getChamber){
+        if(pc->getLocation()->getChamber != tile->getChamber){
             break;
         }
     }
@@ -86,25 +90,20 @@ void Game::createStair(){
 
 void Game::createEnemies(){
     for(int i = 0; i < 20; i++){    
+        Tile *tile = getRandTile();
         int rng = rngGen(18);
         Enemy *e = nullptr;
-        while(true){
-            Tile *tile = getRandTile();
-            if(isValidTile(tile)){
-                break;
-            }
-        }
-        if(rng < 4){
+        if(rng <= 4 && rng >= 1){
             e = new Human();
-        }else if(rng < 7){
+        }else if(rng >=5 && rng <= 7){
             e = new Dwarf();
-        }else if(rng < 12){
+        }else if(rng >= 8 && rng <= 12){
             e = new Halfling();
-        }else if(rng < 14){
+        }else if(rng >= 13 && rng <= 14){
             e = new Elf();
-        }else if(rng < 16){
+        }else if(rng >= 15 && rng <= 16){
             e = new Orc();
-        }else if(rng < 18){
+        }else if(rng >= 17 && rng <= 18){
             e = new Merchant();
         }
         enemies.push_back(e);
@@ -112,3 +111,42 @@ void Game::createEnemies(){
         e->setLocation(tile);
     }
 }
+
+void Game::createPotions(){
+    for(int i = 0; i < 10; i++){
+        Tile *tile = getRandTile();
+        int rng = rngGen(6);
+        Potion *p = nullptr;
+        if (rng == 1){
+            p = new Potion("BD");
+            return;
+        }
+        if (rng = 2){
+            p = new Potion("WD");
+            return;
+        }
+        if (rng = 3){
+            p = new Potion("WA");
+            return;
+        }
+        if (rng = 4){
+            p = new Potion("PH");
+            return;
+        }
+        if (rng = 5){
+            p = new Potion("RH");
+            return;
+        }
+        if (rng = 6){
+            p = new Potion("BA");
+            return;
+        }
+        potions.push_back(p);
+        p->setLocation(tile);
+        tile->setComponent(p);
+    }
+}
+
+void Game::createTreasure(){
+}
+
