@@ -7,7 +7,7 @@
 
 class Item: public Component {
 	public:
-		Item(char symbol, std::string name, std::string type);
+		Item(std::string type, std::string name, char symbol);
 		~Item();
 };
 
