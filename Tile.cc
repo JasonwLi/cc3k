@@ -41,7 +41,7 @@ void Tile::setComponent(Component *comp){
     if(component){
         sym = comp->getChar();
         notify(row, column, sym);
-    else{
+    }else{
         notify(row, column, ch);
     }
 }
