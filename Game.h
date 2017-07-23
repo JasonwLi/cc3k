@@ -17,9 +17,10 @@ class Game{
         int row;
         int column;
         Player *pc;
-        
         int floorLevel;
         vector<Enemy*> enemies;
+        vector<Potion*> potions;
+        vector<Treasure*> treasures;
         Controller* control;
     public:
         Game(int row, int column);
@@ -40,12 +41,13 @@ class Game{
         Tile* getRandTile();
         Tile* getTile(int row, int col);
         Player* getPC();
-        Enemy** getEnemies();
+        vector<Enemy*> getEnemies();
+        vector<Potion*>getPotions();
+        vector<Treasure*>getTreasure();
         void clearFloor();
         void setLevel(int num);
         void setPC(Player *p);
         void notify(int row, int col, char ch);
         string attack(string dir);
         string usePotion(string dir);
-};        
-#endif
+}; 
