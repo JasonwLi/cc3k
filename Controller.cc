@@ -325,7 +325,7 @@ void Controller::play() {
 				}
 			} else if(c && c->getType() == "treasure") {
 				//object is a treasure
-				if(static_cast<Treasure*>(c)->getGoldValue() == "Dragon") {
+				if(static_cast<Treasure*>(c)->getGoldType() == "DragonHoard") {
 					//gold is dragon value = 6
 					//can only be picked up when the dragon is slain
 					enemy = static_cast<DragonHoard*>(c)->getDragon();
