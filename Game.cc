@@ -18,18 +18,18 @@ class Stairs;
 class DragonHoard;
 
 Game::Game(int row, int column):level(0),row(row), columne(column){
-    pc = NULL;
-    control = NULL;
-    theFloor = NULL:
+    pc = nullptr;
+    control = nullptr;
+    theFloor = nullptr;
     for (int i = 0; i < 20; i++){
-        enemies[i] = NULL;
+        enemies[i] = nullptr;
     }
 }
 
 Game::~Game(){
     clearFloor();
     delete pc;
-    if(theFloor != NULL){
+    if(theFloor != nullptr){
         for(int i = 0; i < row; i++){
             delete [] theFloor[i];
         }
@@ -409,7 +409,7 @@ void Game::loadFloor(string floorTemp){
                 Dragon* dt = new Dragon(dh);
                 if(dh){
                     dh->setDragon(dt);
-                    dh = NULL;
+                    dh = nullptr;
                 }
                 else{
                     d = dt;
