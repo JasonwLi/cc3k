@@ -21,6 +21,9 @@ public:
     virtual int getAtk();
     virtual int getDef();
     virtual int getHP();
+    virtual char getSymbol();
+    virtual std::string getName();
+    virtual std::string getType();
 
     virtual void setAtk(int a);
     virtual void setDef(int d);
