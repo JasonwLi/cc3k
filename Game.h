@@ -33,7 +33,7 @@ class Game{
         void createStair();
         void createEnemies();
         void createPotions();
-        void createTreasure();
+        void createTreasures();
         void createFloor();
         void createChambers();
         int getRow();
