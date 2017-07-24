@@ -19,6 +19,9 @@ std::string Character::getRace() {return race;}
 int Character::getAtk() {return Atk;}
 int Character::getDef() {return Def;}
 int Character::getHP() {return HP;}
+char Character::getSymbol() {return symbol;}
+std::string Character::getName() {return name;}
+std::string Character::getType() {return type;}
 
 //set stats of Character
 void Character::setAtk(int a) {
