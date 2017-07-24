@@ -17,7 +17,7 @@ void TextDisplay::print(ostream &out){
         }
         out << endl;
     }
-    return out;
+    return;
 }
 
 TextDisplay::TextDisplay(int length, int width):length(length), width(width){
