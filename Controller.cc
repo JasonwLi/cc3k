@@ -125,10 +125,6 @@ void printSpaces(int total) {
 }
 
 void Controller::printStatus(string msg) {
-	cout << "controller print status"<<endl;
-	Player* pc = game->getPC(); //get the current player of the game
-	string level = to_string(game->getLevel()); //get current floor level
-
 	//default values to be printed
 	string Race = "";
 	string Gold = "0";
@@ -136,6 +132,9 @@ void Controller::printStatus(string msg) {
 	string Atk = "0";
 	string Def = "0";
 	string Action = "";
+
+	string level = to_string(game->getLevel()); //get current floor level
+	Player* pc = game->getPC(); //get the current player of the game
 
 	if(pc) { //if player exists
 		Race = pc->getRace();
@@ -159,9 +158,9 @@ void Controller::printStatus(string msg) {
 
 void Controller::restart() {
 	cout << "controller restart"<<endl;
-//	game->setLevel(0);//set level back to 0
-//  game->clearFloor();	//clear the floor
 	createPlayer(); //create players
+	//	game->setLevel(0);//set level back to 0
+	//  game->clearFloor();	//clear the floor
 //	game->createFloor();//create floor on the game
 }
 
@@ -188,8 +187,10 @@ void Controller::play() {
 	bool pauseEnemies = false;
 	bool playerIsDead = false;
 	string msg = "";
+
 	while(true) {
 		Player *pc = game->getPC(); //get the race 
+		playerRace = pc->getRace();
 		bool dgnAtk = false;
 //	td->print(cout);
 		printStatus(msg);
@@ -225,12 +226,8 @@ void Controller::play() {
 			//direction
 			string moveResult = pc->movePlayer(cmd); //move player with direction
 			if(moveResult != "moved") {
-				//move but nothing special
 				msg += moveResult + cmd + ".";
 				continue;
-			} else if(isdigit(moveResult[0])) {
-				//move and pick up gold
-				msg += "You moved to "+cmd+" and you found "+moveResult+" golds.";
 			} else if(moveResult == "nextLevel") {
 				//up to the next level
 				if(game->getLevel() == 5) {
@@ -238,7 +235,7 @@ void Controller::play() {
 
 					//get final score
 					int finalScore = pc->getGold();
-					if(pc->getRace() == "Shade") finalScore = finalScore * 1.5;
+					if(playerRace == "Shade") finalScore = finalScore * 1.5;
 
 					//print message and score
 					cout << "Congratulations, You've reached the highest level!"<<endl;
@@ -255,7 +252,7 @@ void Controller::play() {
 					} else if(restartGame == "n") {
 						return;
 					}
-				} else  {
+				} else {
 					//go to a higher level
 					if(floorPlan == "") {
 						newFloor(); //floor plan is not from a file
@@ -294,13 +291,14 @@ void Controller::play() {
 			if(attackResult != "failedAttack") {
 				//successful attack
 				msg += attackResult;
-			} else {
+			} else if(attackResult == "noEnemy") {
 				//failed attack
 				msg += "No enemy found on " + direction + ".";
 				continue;
 			}
 		} else {
-			msg += "Invalid input!";
+			msg += "Wrong input!";
+			continue;
 		}
 		//check if player's health points is 0 or not
 		if(pc->getHP() == 0) {
@@ -316,16 +314,12 @@ void Controller::play() {
 		
 		//enemies attack player
 		for(int i=0;i<8;i++) {
-			Component* c = neighbours[i]->getComponent();
 			Enemy* enemy = nullptr;
-			if(c && c->getType() == "enemy") {
-				enemy = static_cast<Enemy*>(c);
-				if(c->getRace() == "Dragon") {
-					// actclear() ????
-				}
-			} else if(c && c->getType() == "treasure") {
+			Component* c = neighbours[i]->getComponent();
+			if(c && c->getType() == "treasure") {
 				//object is a treasure
-				if(static_cast<Treasure*>(c)->getGoldType() == "DragonHoard") {
+				string goldType = static_cast<Treasure*>(c)->getGoldType() ;
+				if(goldType == "DragonHoard") {
 					//gold is dragon value = 6
 					//can only be picked up when the dragon is slain
 					enemy = static_cast<DragonHoard*>(c)->getDragon();
@@ -333,20 +327,20 @@ void Controller::play() {
 						enemy->clearAttack();
 					}
 				}
+			} else if(c && c->getType() == "enemy") {
+				//object is an enemy
+				enemy = static_cast<Enemy*>(c);
+				string enemyRace = enemy->getRace();
+				if(enemyRace == "Dragon") {
+					enemy->clearAttack();
+				}
 			}
 
-			//component is enemy
+			//check if enemy exist
 			if(enemy) {
-				string enemyRace = e->getRace();
-				//enemy exist
-				if(enemyRace == "Merchant" && !e->isHostile()) {
-					//merchant is friendly
-					msg += "Merchant is not hostile.";
-					continue;
-				}
 				//check if enemy has attacked player or not
 				if(!enemy->hasAttackedPlayer()) {
-					if(enemy->getRace() == "Dragon" && dgnAtk) {
+					if(enemyRace == "Dragon" && dgnAtk) {
 						if(dgnAtk) continue;
 						else dgnAtk = true;
 					}
@@ -359,19 +353,25 @@ void Controller::play() {
 						continue;
 					}
 				}
+				//enemy exist
+				if(enemyRace == "Merchant" && !enemy->isHostile()) {
+					//merchant is friendly
+					msg += "Merchant is not hostile.";
+					continue;
+				}
 			}
 		}
 
-		//move enemies to a different tile randomly
+		//move enemies to a different tile randomly if they
 		if(!pauseEnemies) {
 			for(int i=0;i<20;i++) {
 				if(allEnemies[i]) {
 					if(!allEnemies[i]->hasAttackedPlayer()) {
 						//enemy is still alive and have not attacked player
 						int counter = 0;
-						string moveResult = "nomovement"
+						string moveResult = "nomovement";
+						int moveNum = rand() % 4;
 						while(counter < 8 && moveResult == "nomovement") {
-							int moveNum = rand() % 4;
 							moveResult = allEnemies[i]->moveEnemy(moveNum);
 							counter++;
 						}
@@ -382,7 +382,7 @@ void Controller::play() {
 		}
 
 		//if player is troll and still alive, regain 5 HP every turn
-		if(pc->getRace() == "Troll" && !playerIsDead && pc->getHP() != pc->getMaxHP()) {
+		if(playerRace == "Troll" && !playerIsDead && pc->getHP() != pc->getMaxHP()) {
 			pc->heal(5); //regain 5 HP
 			msg += "Regained 5 HP."
 		}
