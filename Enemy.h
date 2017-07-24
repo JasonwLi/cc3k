@@ -49,10 +49,10 @@ class Merchant:public Enemy{
 private:
     static bool hostile;
 public:
-    isHostile();
-    setHostile();
     Merchant();
     ~Merchant();
+    isHostile();
+    setHostile();
     void dropHoard();
 };
 
