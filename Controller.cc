@@ -9,19 +9,19 @@ using namespace std;
 Controller::Controller() {
 	cout << "Controller Constructor"<<endl;
 	fileName = "";
-//	game = new Game(25,79); //25 rows and 79 columns
-//	display = new TextDisplay(25,79);
+	game = new Game(25,79); //25 rows and 79 columns
+	display = new TextDisplay(25,79);
 }
 
 //Destructor
 Controller::~Controller(){
-//	delete display;
-//	delete game;
+	delete display;
+	delete game;
 }
 
 void Controller::init() {
 	cout << "controller init" <<endl;
-//	game->init(this);
+	game->init(this);
 }
 
 void Controller::startGame() {
@@ -30,9 +30,9 @@ void Controller::startGame() {
 	//clear the floor
 	createPlayer();//create new players
 	if(fileName == ""){
-//	game->createFloor(); //create floor in the game		
+	game->createFloor(); //create floor in the game		
 	} else {
-//  game->loadFloor(fileName); //floor plan given
+  game->loadFloor(fileName); //floor plan given
 	}
 	play();//play
 }
@@ -68,7 +68,7 @@ void Controller::createPlayer() {
 	//delete all existing player
 	//ask for a character, or else, it will be default Shade
 	string race = "shade"; //default race
-//	Player* player;
+	Player* player;
 	while(true) {
 		cout << "Choose a race as your character:"<<endl;
 		cout << "s: shade, d: drow, v: vampire, t: troll, g: goblin" <<endl;
@@ -77,27 +77,27 @@ void Controller::createPlayer() {
 		if(c == 's') {
 			//shade
 			race = "shade";
-//			player = new Shade();
+			player = new Shade();
 			break;
 		} else if(c == 'd') {
 			//drow
 			race = "drow";
-//			player = new Drow();
+			player = new Drow();
 			break;
 		} else if(c == 'v') {
 			//vampire
 			race = "vampire";
-//			player = new Vampire();
+			player = new Vampire();
 			break;
 		} else if(c == 'g') {
 			//goblin
 			race = "goblin";
-//			player = new Goblin();
+			player = new Goblin();
 			break;
 		} else if(c == 't') {
 			//troll
 			race = "troll";
-//			player = new Troll();
+			player = new Troll();
 			break;
 		} else {
 			cout << "choose a player!" << endl;
@@ -105,17 +105,17 @@ void Controller::createPlayer() {
 	}
 	cout << "Race chosen: "<<race<<endl;
 	cout << "Start the game" <<endl;
-//	game->setPlayer(player); //set the player of the game based on the race chosen
+	game->setPlayer(player); //set the player of the game based on the race chosen
 }
 
 void Controller::newFloor() {
 	cout << "controller new floor"<<endl;
-//	game->createFloor();
+	game->createFloor();
 }
 
 void Controller::notify(int row, int col, char c) {
 	cout << "controller notify"<<endl;
-//	td->notify(row, col, c);
+	td->notify(row, col, c);
 }
 
 void printSpaces(int total) {
@@ -159,9 +159,9 @@ void Controller::printStatus(string msg) {
 void Controller::restart() {
 	cout << "controller restart"<<endl;
 	createPlayer(); //create players
-	//	game->setLevel(0);//set level back to 0
-	//  game->clearFloor();	//clear the floor
-//	game->createFloor();//create floor on the game
+	game->setLevel(0);//set level back to 0
+	game->clearFloor();	//clear the floor
+	game->createFloor();//create floor on the game
 }
 
 void checkEnemiesHP(Player* pc, Enemy** allEnemies) {
