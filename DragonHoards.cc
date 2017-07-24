@@ -6,6 +6,7 @@ using namespace std;
 
 DragonHoard::DragonHoard(): Treasure("treasure", 'G', 6, "DragonHoard") {
 	dragon = new Dragon(this); //set dragon with its dragonhoard
+	dragonIsSlain = false;
 }
 
 DragonHoard::DragonHoard(Dragon* dragon): Treasure("treasure", 'G', 6, "DragonHoard"), dragon(dragon) {
@@ -21,6 +22,7 @@ void DragonHoard::setDragon(Dragon* dragon) {
 }
 
 void DragonHoard::slainDragon() {
+	dragonIsSlain = true;
 	dragon->getPosition()->setComponent(nullptr);
 	delete dragon;
 	dragon = nullptr;
@@ -28,7 +30,7 @@ void DragonHoard::slainDragon() {
 
 //destructor
 DragonHoard::~DragonHoard() {
-	if(dragon->getPosition() && dragon) {
+	if(dragon->getPosition() && dragonIsSlain) {
 		dragon->getPosition()->setComponent(nullptr);
 	}
 	delete dragon;

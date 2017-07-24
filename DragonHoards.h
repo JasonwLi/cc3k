@@ -8,6 +8,7 @@
 
 class DragonHoard: public Treasure {
 	Dragon* dragon;
+	bool dragonIsSlain;
 	public:
 		DragonHoard();
 		DragonHoard(Dragon* dragon);
