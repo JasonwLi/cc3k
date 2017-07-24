@@ -1,7 +1,7 @@
 #ifndef PROJECT_EFFECT_H
 #define PROJECT_EFFECT_H
 
-#include "player.h"
+#include "Player.h"
 #include <string>
 
 class Effect:public Player{

@@ -8,7 +8,7 @@
 #include "Enemy.h"
 #include "Potion.h"
 #include "Treasure.h"
-#include "Effects.h"
+#include "Effect.h"
 #include <fstream>
 #include <sstream>
 

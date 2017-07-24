@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "TextDisplay.h"
 
 using namespace std;
@@ -13,7 +14,9 @@ void TextDisplay::print(ostream &out){
     for (i=0; i < length; i++){
         for(j=0; j < width; j++){
             out << theDisplay[i][j];
+        }
         out << endl;
+    }
     return out;
 }
 
