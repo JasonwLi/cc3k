@@ -14,7 +14,7 @@ void TextDisplay::print(ostream &out){
         for(j=0; j < width; j++){
             out << theDisplay[i][j];
         out << endl;
-    return out;
+    return;
 }
 
 TextDisplay::TextDisplay(int length, int width):length(length), width(width){
