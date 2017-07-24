@@ -14,7 +14,7 @@ class Treasure: public Item {
 		int getValue();
 		std::string getGoldType();
 		virtual Dragon* getDragon();
-		virtual void deleteDragon();
+		virtual void slainDragon();
 };
 
 class SmallHoard: public Treasure {
