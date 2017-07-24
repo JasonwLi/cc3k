@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -g -Wall -std=c++11 -Werror=vla
-OBJECTS = Controller.o Game.o Enemy.o Player.o TextDisplay.o Tile.o Component.o Item.o Potion.o Treasure.o DragonHoard.o Effect.o Effectdeco.o
+OBJECTS = TextDisplay.o Tile.o Component.o Enemy.o Player.o Item.o Potion.o Treasure.o DragonHoard.o Effect.o Effectdeco.o Game.o Controller.o
 DEPENDS = ${OBJECTS:.o=.d}
 EXEC = cc3k
 
