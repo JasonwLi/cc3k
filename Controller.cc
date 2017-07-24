@@ -158,7 +158,7 @@ void Controller::restart() {
 	game->buildFloor();//create floor on the game
 }
 
-void checkEnemiesHP(Player* &pc, Enemy** &allEnemies) {
+void checkEnemiesHP(Player* &pc, vector<Enemy*> &allEnemies) {
 	for(int i=0;i<20;i++) {
 		Enemy* enemy = allEnemies[i];
 		string enemyRace = enemy->getRace();
@@ -176,7 +176,6 @@ void checkEnemiesHP(Player* &pc, Enemy** &allEnemies) {
 			} else {
 				enemy->dropHoard(); //enemy drop gold when they died
 			}
-			enemy->setPosition(nullptr);
 			//delete and deallocate memory for slain enemy
 			delete enemy;
 			enemy = nullptr;
@@ -222,7 +221,7 @@ void Controller::play() {
 
 	while(true) {
 		Player *pc = game->getPC(); //get the race 
-		playerRace = pc->getRace();
+		string playerRace = pc->getRace();
 		bool dgnAtk = false;
 		display->print(cout);
 		printStatus(msg);
@@ -286,7 +285,7 @@ void Controller::play() {
 					}
 				} else {
 					//go to a higher level
-					if(floorPlan == "") {
+					if(floorPlanLoaded == "") {
 						game->buildFloor(); //floor plan is not from a file
 					} else {
 						//flor plan is from a file to be loaded
@@ -319,7 +318,7 @@ void Controller::play() {
 			//attacks enemy, enemy must be one block away from PC
 			string direction;
 			cin >> direction; //get the direction
-			string attackResult = game->Attack(direction); //try to attack
+			string attackResult = game->attack(direction); //try to attack
 			if(attackResult != "failedAttack") {
 				//successful attack
 				msg += attackResult;
@@ -339,7 +338,7 @@ void Controller::play() {
 		}
 
 		//get the neighbours and all enemies
-		Tile** neighbourTiles = pc->getLocation()->getNeighbours();
+		Tile* neighbourTiles = pc->getLocation()->getNeighbours();
 		vector<Enemy*> allEnemies = game->getEnemies();
 
 		checkEnemiesHP(pc, allEnemies); //check if enemies are dead or not
@@ -347,7 +346,7 @@ void Controller::play() {
 		//enemies attack player
 		for(int i=0;i<8;i++) {
 			Enemy* enemy = nullptr;
-			Component* c = neighbourTiles[i]->getComponent();
+			Component* c = neighbourTiles[i].getComponent();
 			if(c && c->getType() == "treasure") {
 				//object is a treasure
 				string goldType = static_cast<Treasure*>(c)->getGoldType() ;

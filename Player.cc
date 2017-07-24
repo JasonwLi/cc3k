@@ -45,7 +45,7 @@ Character(other->getRace(), other->getAtk(), other->getDef(), other->getHP(),
           other->getSymbol(), other->getName(), other->getType()), 
 gold{other->getGold()}, maxHP{other->getMaxHP()}{}
 
-std::string Player::movePlayer(std::string dir) {
+std::string Player::playerMove(std::string dir) {
     string msg = "";
     msg += move(dir);
     return  msg;

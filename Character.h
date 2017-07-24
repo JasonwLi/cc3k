@@ -4,7 +4,7 @@
 #include <string>
 #include "Component.h"
 
-class Character: public Object {
+class Character: public Component {
 protected:
     const std::string race;
     int Atk;
@@ -14,7 +14,7 @@ protected:
     unsigned int baseAtk;
     unsigned int baseDef;*/
 public:
-    Character(std::string race, int Atk, int Def, int HP, char symbol, string name, string type);
+    Character(std::string race, int Atk, int Def, int HP, char symbol, std::string name, std::string type);
     virtual ~Character() = 0;
 
     virtual std::string getRace();
@@ -29,7 +29,7 @@ public:
     virtual void setDef(int d);
     virtual void setHP(int h);
 
-    virtual std::string move(string dir);
+    virtual std::string move(std::string dir);
     virtual std::string hit(Character* target);
     virtual void takeHit(int n);
     virtual void heal(int n);

@@ -8,8 +8,8 @@ class Player;
 class Enemy;
 class Component;
 class Controller;
-
-using namespace std;
+class Potion;
+class Treasure;
 
 class Game{
     private:
@@ -18,23 +18,22 @@ class Game{
         int column;
         Player *pc;
         int floorLevel;
-        vector<Enemy*> enemies;
-        vector<Potion*> potions;
-        vector<Treasure*> treasures;
+        std::vector<Enemy*> enemies;
+        std::vector<Potion*> potions;
+        std::vector<Treasure*> treasures;
         Controller* control;
     public:
         Game(int row, int column);
         ~Game();
         void init(Controller* ctrl);
         void buildFloor();
-        void loadFloor(string floorTemp);
+        void loadFloor(std::string floorTemp);
         void createFloor();
         void createPC();
         void createStair();
         void createEnemies();
         void createPotions();
         void createTreasures();
-        void createFloor();
         void createChambers();
         int getRow();
         int getCol();
@@ -42,13 +41,15 @@ class Game{
         Tile* getRandTile();
         Tile* getTile(int row, int col);
         Player* getPC();
-        vector<Enemy*> getEnemies();
-        vector<Potion*>getPotions();
-        vector<Treasure*>getTreasure();
+        std::vector<Enemy*> getEnemies();
+        std::vector<Potion*> getPotions();
+        std::vector<Treasure*> getTreasure();
         void clearFloor();
         void setLevel(int num);
         void setPC(Player *p);
         void notify(int row, int col, char ch);
-        string attack(string dir);
-        string usePotion(string dir);
+        std::string attack(std::string dir);
+        std::string usePotion(std::string dir);
 }; 
+
+#endif

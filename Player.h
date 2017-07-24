@@ -3,14 +3,15 @@
 
 #include <string>
 #include "Character.h"
+#include "Component.h"
 
-class Player: public Character{
+class Player: public Character {
 protected:
     unsigned int gold;
     const int maxHP;
 
 public:
-    Player(int maxHP, std::string race, int Atk, int Def, int HP, char symbol, string name, string type);
+    Player(int maxHP, std::string race, int Atk, int Def, int HP, char symbol, std::string name, std::string type);
     Player(Player *other);
     virtual ~Player() = 0;
     virtual int getMaxHP();
@@ -19,7 +20,7 @@ public:
     virtual void addGold(int g);
     virtual void setGold(int g);
     virtual void heal(int h);
-    virtual std::string movePlayer(std::string dir);
+    virtual std::string playerMove(std::string dir);
 };
 
 class Shade : public Player{

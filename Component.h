@@ -3,22 +3,20 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
-
 class Tile;
 
 class Component{
     const char symbol;
-    const string name;
-    const string type;
-    Tile* location
+    const std::string name;
+    const std::string type;
+    Tile* location;
     public:
-        Component(char symbol, string name, string type);
+        Component(char symbol, std::string name, std::string type);
         virtual ~Component() = 0;
         virtual char getSymbol();
-        virtual Tile *getLocation();
-        virtual string getName();
-        virtual string getType();
+        virtual Tile* getLocation();
+        virtual std::string getName();
+        virtual std::string getType();
         virtual void setLocation(Tile *loc);
 };
 

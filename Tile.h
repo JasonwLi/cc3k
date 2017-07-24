@@ -1,7 +1,7 @@
 #ifndef _TILE_H
 #define _TILE_H
 
-#include "game.h"
+#include "Game.h"
 
 using namespace std;
 

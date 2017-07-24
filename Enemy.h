@@ -4,18 +4,20 @@
 #include "Character.h"
 #include <string>
 
-class Enemy:public Character{
+class Enemy: public Character {
 private:
     bool active;
 
 public:
-    Enemy(std::string race, int Atk, int Def, int HP, char symbol, string name, string type);
+    Enemy(std::string race, int Atk, int Def, int HP, char symbol, std::string name, std::string type);
     virtual ~Enemy()=0;
 
     bool ifActive();
     void setActive();
     void setInactive();
     virtual void dropHoard();
+    virtual bool isHostile();
+    virtual void setHostile();
 };
 
 class DragonHoard;
@@ -51,8 +53,8 @@ private:
 public:
     Merchant();
     ~Merchant();
-    isHostile();
-    setHostile();
+    bool isHostile();
+    void setHostile();
     void dropHoard();
 };
 

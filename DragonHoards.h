@@ -4,7 +4,9 @@
 #include <string>
 #include <iostream>
 #include "Treasure.h"
-#include "Enemy.h"
+#include "Item.h"
+
+class Dragon;
 
 class DragonHoard: public Treasure {
 	Dragon* dragon;

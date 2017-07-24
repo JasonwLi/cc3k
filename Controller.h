@@ -4,8 +4,8 @@
 #include <string>
 #include <iostream>
 #include "Game.h"
-#include "TextDisplay.h"
 #include "Component.h"
+#include "TextDisplay.h"
 
 class Controller {
 	Game* game;
@@ -15,7 +15,7 @@ class Controller {
 	public:
 		Controller();
 		~Controller();
-		void init();
+		void initController();
 		void play();
 		void loadFloor(std::string fileName);
 		void createPlayer();

@@ -423,7 +423,7 @@ void Game::loadFloor(string floorTemp){
     }
 }
 
-string Game::Attack(string dir){
+string Game::attack(string dir){
     int dnum;
     if(dir == "no"){
         dnum = 0;
