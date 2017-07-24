@@ -37,6 +37,7 @@ class Vampire : public Player{
 public:
     Vampire();
     ~Vampire();
+    void heal(int h);
 };
 
 class Troll : public Player{
