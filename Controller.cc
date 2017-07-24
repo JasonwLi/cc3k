@@ -314,7 +314,7 @@ void Controller::play() {
 		}
 
 		//get the neighbours and all enemies
-		Tile** neighbours = pc->getPosition()->getNeighbour();
+		Tile** neighbourTiles = pc->getPosition()->getNeighbour();
 		Enemy** allEnemies = game->getEnemies();
 
 		checkEnemiesHP(pc, allEnemies); //check if enemies are dead or not
@@ -322,13 +322,12 @@ void Controller::play() {
 		//enemies attack player
 		for(int i=0;i<8;i++) {
 			Enemy* enemy = nullptr;
-			Component* c = neighbours[i]->getComponent();
+			Component* c = neighbourTiles[i]->getComponent();
 			if(c && c->getType() == "treasure") {
 				//object is a treasure
 				string goldType = static_cast<Treasure*>(c)->getGoldType() ;
 				if(goldType == "DragonHoard") {
-					//gold is dragon value = 6
-					//can only be picked up when the dragon is slain
+					//player is wthin dragonhoard radius
 					enemy = static_cast<DragonHoard*>(c)->getDragon();
 					if(enemy) {
 						enemy->clearAttack();
@@ -348,13 +347,13 @@ void Controller::play() {
 				//check if enemy has attacked player or not
 				string enemyRace = enemy->getRace();
 				if(!enemy->hasAttackedPlayer()) {
-					if(enemyRace == "Dragon" && dgnAtk) {
+					if(enemyRace == "Dragon") {
 						if(dgnAtk) continue;
 						else dgnAtk = true;
 					}
 					//enemy attack/hit player
 					msg += enemy->hit(pc);
-					enemy->attackedPlayer();
+					enemy->attackedPlayer(); //enemy has attacked player
 					//chekc if player is dead
 					if(pc->getHP() == 0) {
 						playerIsDead = true;
