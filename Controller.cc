@@ -2,12 +2,15 @@
 #include <iostream>
 #include <fstream>
 #include "Controller.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Treasure.h"
+#include "Tile.h"
 
 using namespace std;
 
 //Constructor
 Controller::Controller() {
-	cout << "Controller Constructor"<<endl;
 	fileName = "";
 	game = new Game(25,79); //25 rows and 79 columns
 	display = new TextDisplay(25,79);
@@ -20,12 +23,10 @@ Controller::~Controller(){
 }
 
 void Controller::init() {
-	cout << "controller init" <<endl;
 	game->init(this);
 }
 
 void Controller::startGame() {
-	cout << "controller start new game"<<endl;
 	//set level back to 0
 	//clear the floor
 	createPlayer();//create new players
@@ -38,7 +39,6 @@ void Controller::startGame() {
 }
 
 void Controller::loadFloor(string floorFile) {
-	cout << "controller load file"<<endl;
 	fileName = floorFile;
 	fstream file(fileName);
 	string line = "", floorPlan = "";
@@ -64,7 +64,6 @@ void Controller::loadFloor(string floorFile) {
 }
 
 void Controller::createPlayer() {
-	cout << "controller create player"<<endl;
 	//delete all existing player
 	//ask for a character, or else, it will be default Shade
 	string race = "shade"; //default race
@@ -157,7 +156,6 @@ void Controller::printStatus(string msg) {
 }
 
 void Controller::restart() {
-	cout << "controller restart"<<endl;
 	createPlayer(); //create players
 	game->setLevel(0);//set level back to 0
 	game->clearFloor();	//clear the floor
@@ -183,7 +181,6 @@ void checkEnemiesHP(Player* pc, Enemy** allEnemies) {
 }
 
 void Controller::play() {
-	cout << "controller play"<<endl;
 	bool pauseEnemies = false;
 	bool playerIsDead = false;
 	string msg = "";
@@ -384,7 +381,7 @@ void Controller::play() {
 		//if player is troll and still alive, regain 5 HP every turn
 		if(playerRace == "Troll" && !playerIsDead && pc->getHP() != pc->getMaxHP()) {
 			pc->heal(5); //regain 5 HP
-			msg += "Regained 5 HP."
+			msg += "Regained 5 HP.";
 		}
 	}
 }
