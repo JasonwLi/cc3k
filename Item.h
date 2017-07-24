@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-//#include "Component.h"
+#include "Component.h"
 
 class Item: public Component {
 	public:
