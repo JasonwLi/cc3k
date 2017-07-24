@@ -102,7 +102,7 @@ std::string Character::hit(Character *target) {
     //bool hitTarget = false;
     int hpLeft;
     int atkRounds = 1;
-    int missFactor = 1; //1 will lead to always miss, 2 will lead to 50% miss
+    int missFactor = 1; //1 will lead to always hit(rand always 0, no miss), 2 will lead to 50% miss
     if (targetRace == "Halfling" || targetType == "player") missFactor = 2;
     if (targetRace != "Drow" && sourceRace == "Elf") atkRounds = 2;
     for(int i = 0; i<atkRounds; i++){
