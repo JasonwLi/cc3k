@@ -25,7 +25,8 @@ class Game{
     public:
         Game(int row, int column);
         ~Game();
-        void build(Controller* ctrl);
+        void init(Controller* ctrl);
+        void buildFloor();
         void loadFloor(string floorTemp);
         void createFloor();
         void createPC();
