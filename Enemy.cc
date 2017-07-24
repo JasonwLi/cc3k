@@ -56,8 +56,17 @@ Elf::~Elf(){}
 Orc::Orc():Enemy("Orc", 30, 25, 180, 'O',"Orc", "enemy"){}
 Orc::~Orc(){}
 
+bool Merchant::hostile = false;
 Merchant::Merchant():Enemy("Merchant", 70, 5, 30, 'M',"Merchant", "enemy"){}
 Merchant::~Merchant(){}
+
+void Merchant::isHostile() {
+    return hostile;
+}
+
+void Merchant::setHostile(bool hostile) {
+    this->hostile = hostile;
+}
 
 void Merchant::dropHoard() {
     MerchantHoard* mHoard = new MerchantHoard();
