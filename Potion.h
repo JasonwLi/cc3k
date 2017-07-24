@@ -6,11 +6,11 @@
 #include "Item.h"
 
 class Potion: public Item {
-	string potEffect;
+	std::string potEffect;
 	public:
-		Potion(string potEffect);
-		~Potion();
+		Potion(std::string potEffect);
 		std::string getEffect();
+		~Potion();
 };
 
 #endif
