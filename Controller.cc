@@ -339,7 +339,7 @@ void Controller::play() {
 		}
 
 		//get the neighbours and all enemies
-		Tile** neighbourTiles = pc->getLocation()->getNeighbour();
+		Tile** neighbourTiles = pc->getLocation()->getNeighbours();
 		vector<Enemy*> allEnemies = game->getEnemies();
 
 		checkEnemiesHP(pc, allEnemies); //check if enemies are dead or not
