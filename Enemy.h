@@ -15,7 +15,7 @@ public:
     bool ifActive();
     void setActive();
     void setInactive();
-    virtual void dropGold();
+    virtual void dropHoard();
 };
 
 class DragonHoard;
