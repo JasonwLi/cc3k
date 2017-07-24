@@ -114,7 +114,7 @@ void Controller::newFloor() {
 
 void Controller::notify(int row, int col, char c) {
 	cout << "controller notify"<<endl;
-	td->notify(row, col, c);
+	display->notify(row, col, c);
 }
 
 void printSpaces(int total) {
@@ -189,7 +189,7 @@ void Controller::play() {
 		Player *pc = game->getPC(); //get the race 
 		playerRace = pc->getRace();
 		bool dgnAtk = false;
-//	td->print(cout);
+		display->print(cout);
 		printStatus(msg);
 		msg = "";
 

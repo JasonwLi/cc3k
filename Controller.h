@@ -3,12 +3,14 @@
 
 #include <string>
 #include <iostream>
-//#include "Game.h"
-// class Game;
+#include "Game.h"
+#include "TextDisplay.h"
+#include "Component.h"
 
 class Controller {
-//	Game* game;
+	Game* game;
 	std::string fileName;
+	TextDisplay* display;
 	public:
 		Controller();
 		~Controller();
