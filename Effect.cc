@@ -1,7 +1,7 @@
 #include "Effect.h"
 using namespace std;
 
-Effect::Effect(int c, Player *player) :Player(0, "", 0, 0, 0, ' ', "", ""), change{c}, player{player}{}
+Effect::Effect(int c, Player *player) :Player{player}, change{c}{}
 Effect::~Effect() {}
 
 std::string Effect::getRace() { return race;}
