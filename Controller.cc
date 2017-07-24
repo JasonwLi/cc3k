@@ -165,13 +165,21 @@ void Controller::restart() {
 void checkEnemiesHP(Player* pc, Enemy** allEnemies) {
 	for(int i=0;i<20;i++) {
 		Enemy* enemy = allEnemies[i];
+		string enemyRace = enemy->getRace();
 		if(enemy && enemy->getHP() == 0) {
 			//enemy's HP is 0(enemy is dead)
 			if(pc->getRace() == "Goblin") {
 				//goblin can steal 5 gold from slain enemy
 				pc->addGold(5);
 			}
-			enemy->dropGold(); //enemy drop gold when they died
+
+			if(enemyRace != "Human" || enemyRace != "Merchant" || enemyRace != "Dragon") {
+				//not human, merchant or dragon
+				int goldValue = rand() % 2 + 1; //1 or 2
+				pc->addGold(goldValue); //add gold immediately
+			} else {
+				enemy->dropGold(); //enemy drop gold when they died
+			}
 			enemy->setPosition(nullptr);
 			//delete and deallocate memory for slain enemy
 			delete enemy;
