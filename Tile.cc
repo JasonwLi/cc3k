@@ -6,7 +6,7 @@ Tile::Tile(int x, int y, int cham): row(x), column(y), ch(' '), chamber(cham){
     for(int j = 0; j < 8; j++){
         neighbours[j] = NULL;
     }
-    game = NULL:
+    game = NULL;
     component = NULL;
 }
 
@@ -52,14 +52,14 @@ void Tile::setNeighbours(){
     int cm = column-1;
     int rm = row-1;
     if(cp < 80 && rp < 25 && rm > 1 && cm > 1){
-        neighbours = game->getTile(rm, column);
-        neighbours = game->getTile(row, cm);
-        neighbours = game->getTile(rp, column);
-        neighbours = game->getTile(row, cp);
-        neighbours = game->getTile(rp, cm);
-        neighbours = game->getTile(rp, cp);
-        neighbours = game->getTile(rm, cm);
-        neighbours = game->getTile(rm, cp);
+        neighbours[0] = game->getTile(rm, column);
+        neighbours[1] = game->getTile(row, cm);
+        neighbours[2] = game->getTile(rp, column);
+        neighbours[3] = game->getTile(row, cp);
+        neighbours[4] = game->getTile(rp, cm);
+        neighbours[5] = game->getTile(rp, cp);
+        neighbours[6] = game->getTile(rm, cm);
+        neighbours[7] = game->getTile(rm, cp);
     }
 }
 
