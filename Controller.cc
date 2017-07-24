@@ -164,7 +164,7 @@ void Controller::restart() {
 	game->createFloor();//create floor on the game
 }
 
-void checkEnemiesHP(Player* pc, Enemy** allEnemies) {
+void checkEnemiesHP(Player* &pc, Enemy** &allEnemies) {
 	for(int i=0;i<20;i++) {
 		Enemy* enemy = allEnemies[i];
 		string enemyRace = enemy->getRace();
