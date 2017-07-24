@@ -14,7 +14,7 @@
 
 using namespace std;
 
-class Stair;
+class Stairs;
 class DragonHoard;
 
 Game::Game(int row, int column):level(0),row(row), columne(column){
@@ -61,10 +61,6 @@ int rngGen(int chance){
     return rand()%chance+1;
 }
 
-int getChamber(int x, int y){
-    int chNum;
-    return chNum;
-}
     
 void Game::init(string file, Controller* ctrl){
     fstream f(file);
@@ -99,14 +95,14 @@ void Game::createPC(){
     Tile->setComponent(pc);
 }
 
-void Game::createStair(){
+void Game::createStairs(){
     while(true){
         Tile *tile = getRandTile();
         if(pc->getLocation()->getChamber != tile->getChamber){
             break;
         }
     }
-    Stair *s = new Stair();
+    Stairs *s = new Stairs();
     s->setLocation(tile);
     tile->setComponent(s);
 }
@@ -276,7 +272,7 @@ void Game::clearFloor(){
 void Game::buildFloor(){
     clearFloor();
     createPC();
-    createStair();
+    createStairs();
     createPotions();
     createEnemies();
     createTreasures();
@@ -297,7 +293,7 @@ void Game::loadFloor(string floorTemp){
                 pc->setLocation(&(theFloor[j][k]));
             }
             else if(c == '\\'){
-                Stair* s = new Stair();
+                Stairs* s = new Stairs();
                 theFloor[j][k].setComponent(s);
                 s->setLocation(&(theFloor[j][k]));
             }
