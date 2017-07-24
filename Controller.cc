@@ -336,6 +336,7 @@ void Controller::play() {
 			//check if enemy exist
 			if(enemy) {
 				//check if enemy has attacked player or not
+				string enemyRace = enemy->getRace();
 				if(!enemy->hasAttackedPlayer()) {
 					if(enemyRace == "Dragon" && dgnAtk) {
 						if(dgnAtk) continue;
