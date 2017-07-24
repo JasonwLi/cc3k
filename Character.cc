@@ -107,7 +107,7 @@ std::string Character::hit(Character *target) {
     if (targetRace != "Drow" && sourceRace == "Elf") atkRounds = 2;
     for(int i = 0; i<atkRounds; i++){
         int miss = rand() % missFactor;
-        if (miss == 0) {
+        if (miss == 1) {
             if (sourceType == "player"){
                 outbox += "Missed attack from player to " + targetRace;
             }else{
