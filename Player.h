@@ -11,6 +11,7 @@ protected:
 
 public:
     Player(int maxHP, std::string race, int Atk, int Def, int HP, char symbol, string name, string type);
+    Player(Player *other);
     virtual ~Player() = 0;
     virtual int getMaxHP();
     virtual int getGold();
