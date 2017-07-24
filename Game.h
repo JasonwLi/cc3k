@@ -30,7 +30,7 @@ class Game{
         void loadFloor(std::string floorTemp);
         void createFloor();
         void createPC();
-        void createStair();
+        void createStairs();
         void createEnemies();
         void createPotions();
         void createTreasures();
