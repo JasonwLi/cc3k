@@ -14,7 +14,7 @@ class Tile {
         int column;
         int chamberNum;
         char ch;
-        Game *game
+        Game *game;
         Tile *neighbours[8];
         Component *component;
     public:
