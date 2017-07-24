@@ -28,7 +28,7 @@ Dragon* Treasure::getDragon() {
 	return nullptr; //base class default 
 }
 
-void Treasure::slainDragon() {
+void Treasure::slayDragon() {
 	return;
 }
 

@@ -13,7 +13,7 @@ class DragonHoard: public Treasure {
 		DragonHoard();
 		DragonHoard(Dragon* dragon);
 		Dragon* getDragon();
-		void slainDragon();
+		void slayDragon();
 		void setDragon(Dragon* dragon);
 		~DragonHoard();
 };

@@ -21,7 +21,7 @@ void DragonHoard::setDragon(Dragon* dragon) {
 	this.dragon = dragon;
 }
 
-void DragonHoard::slainDragon() {
+void DragonHoard::slayDragon() {
 	dragonIsSlain = true;
 	dragon->getPosition()->setComponent(nullptr);
 	delete dragon;
