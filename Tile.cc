@@ -2,12 +2,13 @@
 #include "Tile.h"
 #include <iostream>
 
-Tile::Tile(int x, int y, int cham): row(x), column(y), ch(' '), chamber(cham){
+Tile::Tile(int x, int y, int cham): row(x), column(y), chamberNum(cham){
     for(int j = 0; j < 8; j++){
         neighbours[j] = NULL;
     }
     game = NULL;
     component = NULL;
+    ch = ' ';
 }
 
 Tile::~Tile(){};
@@ -16,15 +17,15 @@ Component* Tile::getComponent(){
     return component;
 }
 
-void Tile::getRow(){
+int Tile::getRow(){
     return row;
 }
 
-void Tile::getColumn(){
+int Tile::getColumn(){
     return column;
 }
 
-void Tile::getCh(){
+char Tile::getCh(){
     return ch;
 }
 
@@ -37,9 +38,10 @@ void Tile::notify(int row, int col, char ch){
 }
 
 void Tile::setComponent(Component *comp){
+    char sym;
     component = comp;
     if(component){
-        sym = comp->getChar();
+        sym = comp->getSymbol();
         notify(row, column, sym);
     }else{
         notify(row, column, ch);
@@ -70,10 +72,9 @@ void Tile::setTile(char c, Game *g){
 }
 
 Tile* Tile::getNeighbour(int num){
-    return neighbours[n];
+    return neighbours[num];
 }
 
 Tile** Tile::getNeighbours(){
     return neighbours;
 }
-
