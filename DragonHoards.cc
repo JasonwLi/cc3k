@@ -23,15 +23,16 @@ void DragonHoard::setDragon(Dragon* dragon) {
 
 void DragonHoard::slayDragon() {
 	dragonIsSlain = true;
-	dragon->getPosition()->setComponent(nullptr);
+	dragon->getLocation()->setComponent(nullptr);
 	delete dragon;
 	dragon = nullptr;
 }
 
 //destructor
 DragonHoard::~DragonHoard() {
-	if(dragon->getPosition() && dragonIsSlain) {
-		dragon->getPosition()->setComponent(nullptr);
+	if(!dragonIsSlain) {
+		dragon->getLocation()->setComponent(nullptr);
 	}
 	delete dragon;
+	dragon = nullptr;
 }

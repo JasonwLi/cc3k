@@ -180,7 +180,7 @@ void checkEnemiesHP(Player* &pc, Enemy** &allEnemies) {
 				int goldValue = rand() % 2 + 1; //1 or 2
 				pc->addGold(goldValue); //add gold immediately
 			} else {
-				enemy->dropGold(); //enemy drop gold when they died
+				enemy->dropHoard(); //enemy drop gold when they died
 			}
 			enemy->setPosition(nullptr);
 			//delete and deallocate memory for slain enemy
@@ -231,7 +231,7 @@ void Controller::play() {
 		} else if(cmd == "no" || cmd == "so" || cmd == "ea" || cmd == "we" ||
 			cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw") {
 			//direction
-			string moveResult = pc->movePlayer(cmd); //move player with direction
+			string moveResult = pc->playerMove(cmd); //move player with direction
 			if(moveResult != "moved") {
 				msg += moveResult + cmd + ".";
 				continue;
@@ -314,7 +314,7 @@ void Controller::play() {
 		}
 
 		//get the neighbours and all enemies
-		Tile** neighbourTiles = pc->getPosition()->getNeighbour();
+		Tile** neighbourTiles = pc->getLocation()->getNeighbour();
 		Enemy** allEnemies = game->getEnemies();
 
 		checkEnemiesHP(pc, allEnemies); //check if enemies are dead or not
@@ -330,7 +330,7 @@ void Controller::play() {
 					//player is wthin dragonhoard radius
 					enemy = static_cast<DragonHoard*>(c)->getDragon();
 					if(enemy) {
-						enemy->clearAttack();
+						enemy->setInactive();
 					}
 				}
 			} else if(c && c->getType() == "enemy") {
@@ -338,7 +338,7 @@ void Controller::play() {
 				enemy = static_cast<Enemy*>(c);
 				string enemyRace = enemy->getRace();
 				if(enemyRace == "Dragon") {
-					enemy->clearAttack();
+					enemy->setInactive();
 				}
 			}
 
@@ -346,14 +346,14 @@ void Controller::play() {
 			if(enemy) {
 				//check if enemy has attacked player or not
 				string enemyRace = enemy->getRace();
-				if(!enemy->hasAttackedPlayer()) {
+				if(!enemy->ifActive()) {
 					if(enemyRace == "Dragon") {
 						if(dgnAtk) continue;
 						else dgnAtk = true;
 					}
 					//enemy attack/hit player
 					msg += enemy->hit(pc);
-					enemy->attackedPlayer(); //enemy has attacked player
+					enemy->setActive(); //enemy is set to active
 					//chekc if player is dead
 					if(pc->getHP() == 0) {
 						playerIsDead = true;
@@ -373,17 +373,17 @@ void Controller::play() {
 		if(!pauseEnemies) {
 			for(int i=0;i<20;i++) {
 				if(allEnemies[i]) {
-					if(!allEnemies[i]->hasAttackedPlayer()) {
+					if(!allEnemies[i]->ifActive()) {
 						//enemy is still alive and have not attacked player
 						int counter = 0;
-						string moveResult = "nomovement";
+						string moveResult = "Blocked";
 						int moveNum = rand() % 4;
-						while(counter < 8 && moveResult == "nomovement") {
+						while(counter < 8 && moveResult == "Blocked") {
 							moveResult = allEnemies[i]->moveEnemy(moveNum);
 							counter++;
 						}
 					}
-					allEnemies[i]->clearAttack();
+					allEnemies[i]->setInactive();
 				}
 			}
 		}
