@@ -4,22 +4,25 @@
 #include <string>
 #include <iostream>
 #include "Game.h"
-class Game;
+#include "TextDisplay.h"
+#include "Component.h"
 
 class Controller {
 	Game* game;
+	std::string fileName;
+	TextDisplay* display;
 	public:
 		Controller();
 		~Controller();
 		void init();
 		void play();
-		void loadFile(string fileName);
+		void loadFloor(std::string fileName);
 		void createPlayer();
+		void startGame();
 		void newFloor();
 		void notify(int row, int col, char c);
-		void printStatus(string msg);
+		void printStatus(std::string msg);
 		void restart();
-		void quit();
-}
+};
 
 #endif
