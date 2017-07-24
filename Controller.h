@@ -10,6 +10,7 @@
 class Controller {
 	Game* game;
 	std::string fileName;
+	std::string floorPlanLoaded;
 	TextDisplay* display;
 	public:
 		Controller();
@@ -19,7 +20,6 @@ class Controller {
 		void loadFloor(std::string fileName);
 		void createPlayer();
 		void startGame();
-		void newFloor();
 		void notify(int row, int col, char c);
 		void printStatus(std::string msg);
 		void restart();

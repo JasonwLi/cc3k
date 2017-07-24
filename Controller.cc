@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "Controller.h"
 #include "Player.h"
 #include "Enemy.h"
@@ -14,6 +15,7 @@ using namespace std;
 //Constructor
 Controller::Controller() {
 	fileName = "";
+	floorPlanLoaded = "";
 	game = new Game(25,79); //25 rows and 79 columns
 	display = new TextDisplay(25,79);
 }
@@ -24,18 +26,17 @@ Controller::~Controller(){
 	delete game;
 }
 
-void Controller::init() {
+void Controller::initController() {
 	game->init(this);
 }
 
 void Controller::startGame() {
-	//set level back to 0
-	//clear the floor
+	game->setLevel(0); //set level to 0
 	createPlayer();//create new players
-	if(fileName == ""){
-	game->createFloor(); //create floor in the game		
+	if(floorPlanLoaded == ""){
+		game->buildFloor(); //create floor in the game		
 	} else {
-  game->loadFloor(fileName); //floor plan given
+  	game->loadFloor(floorPlanLoaded); //floor plan given
 	}
 	play();//play
 }
@@ -43,7 +44,7 @@ void Controller::startGame() {
 void Controller::loadFloor(string floorFile) {
 	fileName = floorFile;
 	fstream file(fileName);
-	string line = "", floorPlan = "";
+	string line = "";
 	int row  = game->getRow(); //get the # of rows of the floor
 	int level = game->getLevel(); //get the current level
 
@@ -56,17 +57,17 @@ void Controller::loadFloor(string floorFile) {
 		for(int j=0;j<row;j++) {
 			//get the floorplan of the level
 			getline(file, line);
-			floorPlan += line + "\n";
+			floorPlanLoaded += line + "\n";
 		}
 	} else {
 		fileName = ""; //reset back to blank, since file cant be opened
-		cout << "Failed to open file!" <<endl;
+		floorPlanLoaded = "";
+		cout << "Failed to open file! Floor will be empty." <<endl;
 	}
-	//cout << floorPlan; //FOR TESTING
+	//cout << floorPlanLoaded; //FOR TESTING
 }
 
 void Controller::createPlayer() {
-	//delete all existing player
 	//ask for a character, or else, it will be default Shade
 	string race = "shade"; //default race
 	Player* player;
@@ -106,16 +107,10 @@ void Controller::createPlayer() {
 	}
 	cout << "Race chosen: "<<race<<endl;
 	cout << "Start the game" <<endl;
-	game->setPlayer(player); //set the player of the game based on the race chosen
-}
-
-void Controller::newFloor() {
-	cout << "controller new floor"<<endl;
-	game->createFloor();
+	game->setPC(player); //set the player of the game based on the race chosen
 }
 
 void Controller::notify(int row, int col, char c) {
-	cout << "controller notify"<<endl;
 	display->notify(row, col, c);
 }
 
@@ -160,8 +155,7 @@ void Controller::printStatus(string msg) {
 void Controller::restart() {
 	createPlayer(); //create players
 	game->setLevel(0);//set level back to 0
-	game->clearFloor();	//clear the floor
-	game->createFloor();//create floor on the game
+	game->buildFloor();//create floor on the game
 }
 
 void checkEnemiesHP(Player* &pc, Enemy** &allEnemies) {
@@ -188,6 +182,37 @@ void checkEnemiesHP(Player* &pc, Enemy** &allEnemies) {
 			enemy = nullptr;
 		}
 	}
+}
+
+string getDirection(int moveNum) {
+	string dir="ea";
+	switch(moveNum) {
+		case 0:
+			dir = "no";
+			break;
+		case 1:
+			dir = "we";
+			break;
+		case 2:
+			dir = "so";
+			break;
+		case 3:
+			dir = "ea";
+			break;
+		case 4:
+			dir = "nw";
+			break;
+		case 5:
+			dir = "ne";
+			break;
+		case 6:
+			dir = "sw";
+			break;
+		case 7:
+			dir = "se";
+			break;
+	}
+	return dir;
 }
 
 void Controller::play() {
@@ -262,7 +287,7 @@ void Controller::play() {
 				} else {
 					//go to a higher level
 					if(floorPlan == "") {
-						newFloor(); //floor plan is not from a file
+						game->buildFloor(); //floor plan is not from a file
 					} else {
 						//flor plan is from a file to be loaded
 						loadFloor(fileName);
@@ -294,7 +319,7 @@ void Controller::play() {
 			//attacks enemy, enemy must be one block away from PC
 			string direction;
 			cin >> direction; //get the direction
-			string attackResult = game->attack(direction); //try to attack
+			string attackResult = game->Attack(direction); //try to attack
 			if(attackResult != "failedAttack") {
 				//successful attack
 				msg += attackResult;
@@ -315,7 +340,7 @@ void Controller::play() {
 
 		//get the neighbours and all enemies
 		Tile** neighbourTiles = pc->getLocation()->getNeighbour();
-		Enemy** allEnemies = game->getEnemies();
+		vector<Enemy*> allEnemies = game->getEnemies();
 
 		checkEnemiesHP(pc, allEnemies); //check if enemies are dead or not
 		
@@ -330,7 +355,7 @@ void Controller::play() {
 					//player is wthin dragonhoard radius
 					enemy = static_cast<DragonHoard*>(c)->getDragon();
 					if(enemy) {
-						enemy->setInactive();
+						enemy->setInactive(); //dragon should not move
 					}
 				}
 			} else if(c && c->getType() == "enemy") {
@@ -338,7 +363,7 @@ void Controller::play() {
 				enemy = static_cast<Enemy*>(c);
 				string enemyRace = enemy->getRace();
 				if(enemyRace == "Dragon") {
-					enemy->setInactive();
+					enemy->setInactive(); //dragon should not move
 				}
 			}
 
@@ -377,9 +402,10 @@ void Controller::play() {
 						//enemy is still alive and have not attacked player
 						int counter = 0;
 						string moveResult = "Blocked";
-						int moveNum = rand() % 4;
 						while(counter < 8 && moveResult == "Blocked") {
-							moveResult = allEnemies[i]->moveEnemy(moveNum);
+							int moveNum = rand() % 8;
+							string moveDir = getDirection(moveNum);
+							moveResult = allEnemies[i]->move(moveDir);
 							counter++;
 						}
 					}

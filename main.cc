@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
 			seed = stoi(argv[2]);
 		}
 		srand(seed);
-		controller.init();
+		controller.initController();
 		if(argc > 1) {
 			//load floor from a file
 			controller.loadFloor(argv[1]);
