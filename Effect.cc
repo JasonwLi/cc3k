@@ -1,7 +1,9 @@
 #include "Effect.h"
 using namespace std;
 
-//constructor takes in the player pointer inside decorator, other fields are set to default
+//constructor takes in the 
+
+pointer inside decorator, other fields are set to default
 Effect::Effect(int c, Player *player) :Player(player), player{player}, change{c}{}
 Effect::~Effect() {}
 
@@ -38,17 +40,17 @@ void Effect::setGold(int g) {
 }
 
 void Effect::setAtk(int a) {
-    Player->setAtk;
+    player->setAtk;
     return;
 }
 
 void Effect::setDef(int d) {
-    Player->setDef;
+    player->setDef;
     return;
 }
 
 void Effect::setHP(int h) {
-    Player->setHP;
+    player->setHP;
     return;
 }
 
