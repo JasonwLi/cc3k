@@ -19,6 +19,18 @@ class Treasure: public Item {
 		virtual ~Treasure() = 0;
 };
 
+class DragonHoard: public Treasure {
+	Dragon* dragon;
+	bool dragonIsSlain;
+	public:
+		DragonHoard();
+		DragonHoard(Dragon* dragon);
+		Dragon* getDragon();
+		void slayDragon();
+		void setDragon(Dragon* dragon);
+		~DragonHoard();
+};
+
 class SmallHoard: public Treasure {
 	public:
 		SmallHoard();
