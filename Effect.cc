@@ -8,17 +8,17 @@ Effect::Effect(int c, Player *player) :Player(player), player{player}, change{c}
 Effect::~Effect() {}
 
 //all access to fields are set to player pointed by Player*
-std::string Effect::getRace() { return player->race;}
-int Effect::getAtk() { return player->Atk;}
-int Effect::getDef() { return player->Def;}
-int Effect::getHP() { return player->HP;}
+std::string Effect::getRace() { return player->getRace;}
+int Effect::getAtk() { return player->getAtk;}
+int Effect::getDef() { return player->getDef;}
+int Effect::getHP() { return player->getHP;}
 
-char Effect::getSymbol(){ return player->symbol;}
-std::string Effect::getName() { return player->name;}
-std::string Effect::getType() { return player->type;}
+char Effect::getSymbol(){ return player->getSymbol;}
+std::string Effect::getName() { return player->getName;}
+std::string Effect::getType() { return player->getType;}
 
-int Effect::getMaxHP() { return player->maxHP;}
-unsigned int Effect::getGold() { return player->gold;}
+int Effect::getMaxHP() { return player->getMaxHP;}
+unsigned int Effect::getGold() { return player->getGold;}
 
 Player* Effect::getPlayer() {
     //delete this pointer, return the player* inside the decorator
