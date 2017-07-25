@@ -19,6 +19,8 @@ int Effect::getMaxHP() { return player->maxHP;}
 unsigned int Effect::getGold() { return player->gold;}
 
 Player* Effect::getPlayer() {
+    //delete this pointer, return the player* inside the decorator
+    //so potion effects are cleaned up
     Player* temp = player->getPlayer();
     delete this;
     return temp;
