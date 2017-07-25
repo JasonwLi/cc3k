@@ -6,10 +6,11 @@
 class Tile;
 
 class Component{
-    const char symbol;
-    const std::string name;
-    const std::string type;
-    Tile* location;
+    protected:
+        const char symbol;
+        const std::string name;
+        const std::string type;
+        Tile* location;
     public:
         Component(char symbol, std::string name, std::string type);
         virtual ~Component() = 0;
