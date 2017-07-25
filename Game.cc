@@ -24,7 +24,7 @@ Game::Game(int row, int column):row(row), columne(column){
     control = nullptr;
     theFloor = nullptr;
     for (int i = 0; i < 20; i++){
-        enemies[i] = nullptr;
+        enemies.push_back(nullptr);
     }
 }
 
