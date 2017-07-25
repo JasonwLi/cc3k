@@ -2,7 +2,7 @@
 #include "Tile.h"
 #include "Controller.h"
 #include "Component.h"
-#include "DragonHoards.h"
+#include "DragonHoard.h"
 #include "Stair.h"
 #include "Player.h"
 #include "Enemy.h"
