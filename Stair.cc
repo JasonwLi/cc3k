@@ -1,8 +1,8 @@
 #include "Stair.h"
 
 
-Stairs::Stair() : Component('\\', " " ,"stairs") {
+Stairs::Stairs() : Component('\\', " " ,"stairs") {
 }
 
-Stairs::~Stair() {
+Stairs::~Stairs() {
 }
