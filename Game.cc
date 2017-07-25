@@ -89,7 +89,7 @@ void Game::createPC(){
     int c = rngGen(5);
     while(true){
         Tile *tile = getRandTile();
-        if(tile->getChamber == c){
+        if(tile->getChamber() == c){
             break;
         }
     }
@@ -212,7 +212,6 @@ Tile* Game::getTile(int row, int col){
 
 void Game::setPC(Player* p){
     pc = p;
-    return;
 }
 
 Player* Game::getPlayer(){
