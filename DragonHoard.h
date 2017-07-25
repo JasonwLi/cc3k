@@ -1,12 +1,11 @@
-#ifndef _DRAGONHOARDS_
-#define _DARGONHOARDS_
+#ifndef _DRAGONHOARD_H
+#define _DARGONHOARD_H
 
 #include <string>
 #include <iostream>
 #include "Treasure.h"
 #include "Item.h"
-
-class Dragon;
+#include "Enemy.h"
 
 class DragonHoard: public Treasure {
 	Dragon* dragon;

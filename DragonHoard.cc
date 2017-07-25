@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include "DragonHoard.h"
+#include "Tile.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ Dragon* DragonHoard::getDragon() {
 }
 
 void DragonHoard::setDragon(Dragon* dragon) {
-	this.dragon = dragon;
+	this->dragon = dragon;
 }
 
 void DragonHoard::slayDragon() {
