@@ -6,7 +6,7 @@
 
 class Stairs: public Component {
 public: 
-    Staisr();
+    Stairs();
     ~Stairs();
 };
 
