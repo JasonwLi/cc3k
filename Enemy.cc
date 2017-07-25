@@ -24,6 +24,14 @@ void Enemy::setInactive(){
 void Enemy::dropHoard(){
     return;
 }
+void Enemy::setHostile(){
+    return;
+}
+
+bool Enemy::isHostile(){
+    return false;
+}
+
 
 Human::Human():Enemy("Human", 20, 20, 140, 'H', "Human", "enemy"){}
 Human::~Human(){}
