@@ -21,7 +21,7 @@ public:
     std::string getName();
     std::string getType();
     int getMaxHP();
-    int getGold();
+    unsigned int getGold();
     Player* getPlayer();
     void addGold(int g);
     void setGold(int g);
@@ -30,8 +30,8 @@ public:
     void setDef(int d);
     void setHP(int h);
 
-    std::string move(string dir);
-    std::string movePlayer(string dir);
+    std::string move(std::string dir);
+    std::string movePlayer(std::string dir);
     std::string hit(Character* target);
     void takeHit(int n);
     void heal(int h);

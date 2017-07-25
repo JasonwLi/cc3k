@@ -14,7 +14,7 @@ std::string Effect::getName() { return name;}
 std::string Effect::getType() { return type;}
 
 int Effect::getMaxHP() { return maxHP;}
-int Effect::getGold() { return gold;}
+unsigned int Effect::getGold() { return gold;}
 Player* Effect::getPlayer() { return this;}
 
 
