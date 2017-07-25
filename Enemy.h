@@ -54,6 +54,7 @@ public:
     ~Merchant();
     void dropHoard();
     bool isHostile();
+    void setHostile();
 };
 
 class Halfling:public Enemy{

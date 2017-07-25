@@ -24,4 +24,6 @@ int main(int argc, char* argv[]) {
 	} else {
 		cout << "Usage: ./cc3k [filename] [seed]" << endl;
 	}
+
+	return 0;
 }
