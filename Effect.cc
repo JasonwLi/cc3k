@@ -1,45 +1,52 @@
 #include "Effect.h"
 using namespace std;
 
-Effect::Effect(int c, Player *player) :Player{player}, change{c}{}
+//constructor takes in the player pointer inside decorator, other fields are set to default
+Effect::Effect(int c, Player *player) :Player(0, 0, 0, 0, 0, "", ' ', "")player{player}, change{c}{}
 Effect::~Effect() {}
 
-std::string Effect::getRace() { return race;}
-int Effect::getAtk() { return Atk;}
-int Effect::getDef() { return Def;}
-int Effect::getHP() { return HP;}
+//all access to fields are set to player pointed by Player*
+std::string Effect::getRace() { return player->race;}
+int Effect::getAtk() { return player->Atk;}
+int Effect::getDef() { return player->Def;}
+int Effect::getHP() { return player->HP;}
 
-char Effect::getSymbol(){ return symbol;}
-std::string Effect::getName() { return name;}
-std::string Effect::getType() { return type;}
+char Effect::getSymbol(){ return player->symbol;}
+std::string Effect::getName() { return player->name;}
+std::string Effect::getType() { return player->type;}
 
-int Effect::getMaxHP() { return maxHP;}
-unsigned int Effect::getGold() { return gold;}
-Player* Effect::getPlayer() { return this;}
+int Effect::getMaxHP() { return player->maxHP;}
+unsigned int Effect::getGold() { return player->gold;}
+
+Player* Effect::getPlayer() {
+    Player* temp = player->getPlayer();
+    delete this;
+    return temp;
+}
 
 
 void Effect::addGold(int g) {
-    gold += g;
+    player->addGold;
     return;
 }
 
 void Effect::setGold(int g) {
-    gold = g;
+    player->setGold;
     return;
 }
 
 void Effect::setAtk(int a) {
-    Atk = a;
+    Player->setAtk;
     return;
 }
 
 void Effect::setDef(int d) {
-    Def = d;
+    Player->setDef;
     return;
 }
 
 void Effect::setHP(int h) {
-    HP = h;
+    Player->setHP;
     return;
 }
 
