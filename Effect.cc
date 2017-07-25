@@ -2,7 +2,7 @@
 using namespace std;
 
 //constructor takes in the player pointer inside decorator, other fields are set to default
-Effect::Effect(int c, Player *player) :Player(0, 0, 0, 0, 0, "", ' ', ""), player{player}, change{c}{}
+Effect::Effect(int c, Player *player) :Player(player), player{player}, change{c}{}
 Effect::~Effect() {}
 
 //all access to fields are set to player pointed by Player*
