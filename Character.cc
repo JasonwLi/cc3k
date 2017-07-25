@@ -144,7 +144,7 @@ std::string Character::hit(Character *target) {
                     }
                 }
                 if (sourceRace == "Merchant") {
-                    Merchant::hostile == true;
+                    Merchant::hostile = true;
                 }
             }
         }
