@@ -80,7 +80,7 @@ std::string Character::move(string dir) {
             }else if(destComp->getType() == "potion"){
                 return "Blocked by potion";
             }else { //blocked by something else, should be enemy
-                return "Blocked by " + destComp->getRace();
+                return "Blocked by " + destComp->getName();
             }
         }else{  //nothing's blocking the way of player
             outbox += "Player moved";
@@ -143,7 +143,7 @@ std::string Character::hit(Character *target) {
                         outbox += " Vamp healed 5 hp from attack. ";
                     }
                 }
-                if (defRace == "Merchant") {
+                if (sourceRace == "Merchant") {
                     Merchant::hostile == true;
                 }
             }
