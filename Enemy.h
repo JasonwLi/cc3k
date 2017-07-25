@@ -48,14 +48,12 @@ public:
 };
 
 class Merchant:public Enemy{
-private:
-    static bool hostile;
 public:
+    static bool hostile;
     Merchant();
     ~Merchant();
-    bool isHostile();
-    void setHostile();
     void dropHoard();
+    bool isHostile();
 };
 
 class Halfling:public Enemy{

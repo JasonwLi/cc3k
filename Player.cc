@@ -13,7 +13,7 @@ int Player::getMaxHP() {
     return  maxHP;
 }
 
-int Player::getGold() {
+unsigned int Player::getGold() {
     return gold;
 }
 

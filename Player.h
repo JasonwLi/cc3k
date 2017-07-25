@@ -15,7 +15,7 @@ public:
     Player(Player *other);
     virtual ~Player() = 0;
     virtual int getMaxHP();
-    virtual int getGold();
+    virtual unsigned int getGold();
     virtual Player* getPlayer();
     virtual void addGold(int g);
     virtual void setGold(int g);

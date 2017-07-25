@@ -60,12 +60,8 @@ bool Merchant::hostile = false;
 Merchant::Merchant():Enemy("Merchant", 70, 5, 30, 'M',"Merchant", "enemy"){}
 Merchant::~Merchant(){}
 
-void Merchant::isHostile() {
-    return hostile;
-}
-
-void Merchant::setHostile(bool hostile) {
-    this->hostile = hostile;
+bool Merchant::isHostile(){
+  return this->hostile;
 }
 
 void Merchant::dropHoard() {
@@ -78,8 +74,8 @@ void Merchant::dropHoard() {
 Halfling::Halfling():Enemy("Halfling", 15, 20, 100, 'H',"Halfling", "enemy"){}
 Halfling::~Halfling(){}
 
-Dragon::Dragon() : Enemy("Dragon", 20, 20, 150, 'D', "enemy", "Dragon", "enemy"), dHoard(nullptr) {}
-Dragon::Dragon(DragonHoard* dHoard) : Enemy("Dragon", 20, 20, 150, 'D', "enemy", "Dragon", "enemy"), dHoard(dHoard) {}
+Dragon::Dragon() : Enemy("Dragon", 20, 20, 150, 'D', "Dragon", "enemy"), dHoard(nullptr) {}
+Dragon::Dragon(DragonHoard* dHoard) : Enemy("Dragon", 20, 20, 150, 'D', "Dragon", "enemy"), dHoard(dHoard) {}
 Dragon::~Dragon() {}
 DragonHoard* Dragon::getHoard() {return dHoard;}
 void Dragon::setHoard(DragonHoard *dHoard) {dHoard = dHoard;}
