@@ -1,7 +1,7 @@
 #include "Effect.h"
 using namespace std;
 
-//constructor takes in the player pointer inside decorator, other fields are set to default
+//constructor takes in the player pointer inside decorator, other fields are set to same as what player points to
 Effect::Effect(int c, Player *player) :Player{player->getMaxHP(), player->getRace(), player->getAtk(),player->getDef(),
                                               player->getHP(), player->getSymbol(), player->getName(), player->getType()},
                                        change{c}, player{player}{}
