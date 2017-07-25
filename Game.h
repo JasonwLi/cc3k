@@ -25,7 +25,7 @@ class Game{
     public:
         Game(int row, int column);
         ~Game();
-        void init(Controller* ctrl);
+        void init(string file, Controller* ctrl);
         void buildFloor();
         void loadFloor(std::string floorTemp);
         void createFloor();
