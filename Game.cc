@@ -93,7 +93,7 @@ void Game::init(string file, Controller* ctrl){
         theFloor[z] = new Tile[column];
     }
     for(int k = 0; k < row; k++){
-        for (int j = 0; k < column; j++){
+        for (int j = 0; j < column; j++){
             char c;
             f >> noskipws >> c;
             int cham = getChamber(k,j);
