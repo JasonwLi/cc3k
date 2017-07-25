@@ -278,15 +278,16 @@ void Game::clearFloor(){
             }
         }
     }
-    for(int k = 0; k < 20; k++){
-        delete enemies.front();
+    while(!enemies.empty()){
+         enemies.pop_back();
     }
-    for(int k = 0; k < 10; k++){
-        delete treasures.front();
+    while(!treasures.empty()){
+         treasures.pop_back();
     }
-    for(int k = 0; k < 10; k++){
-        delete potions.front();
+    while(!potions.empty()){
+        potions.pop_back();
     }
+
     if(pc){
         Tile *t = pc->getLocation();
         if(t){
