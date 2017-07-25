@@ -48,7 +48,7 @@ std::string Effect::move(string dir) {
 }
 
 std::string Effect::movePlayer(string dir) {
-    return player->movePlayer(dir);
+    return player->playerMove(dir);
 }
 
 std::string Effect::hit(Character *target) {

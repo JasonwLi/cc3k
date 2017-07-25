@@ -20,7 +20,7 @@ public:
     virtual void addGold(int g);
     virtual void setGold(int g);
     virtual void heal(int h);
-    virtual std::string movePlayer(std::string dir);
+    virtual std::string playerMove(std::string dir);
 };
 
 class Shade : public Player{

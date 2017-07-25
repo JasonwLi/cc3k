@@ -27,7 +27,7 @@ Controller::~Controller(){
 }
 
 void Controller::initController() {
-	game->init(this);
+	game->init("sample_floor.txt", this);
 }
 
 void Controller::startGame() {
@@ -338,7 +338,7 @@ void Controller::play() {
 		}
 
 		//get the neighbours and all enemies
-		Tile* neighbourTiles = pc->getLocation()->getNeighbours();
+		Tile** neighbourTiles = pc->getLocation()->getNeighbours();
 		vector<Enemy*> allEnemies = game->getEnemies();
 
 		checkEnemiesHP(pc, allEnemies); //check if enemies are dead or not
@@ -346,7 +346,7 @@ void Controller::play() {
 		//enemies attack player
 		for(int i=0;i<8;i++) {
 			Enemy* enemy = nullptr;
-			Component* c = neighbourTiles[i].getComponent();
+			Component* c = neighbourTiles[i]->getComponent();
 			if(c && c->getType() == "treasure") {
 				//object is a treasure
 				string goldType = static_cast<Treasure*>(c)->getGoldType() ;
