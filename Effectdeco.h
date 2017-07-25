@@ -14,7 +14,7 @@ class boostDef: public Effect{
 public:
     boostDef(int change, Player* player);
     ~boostDef();
-    int getDtk();
+    int getDef();
 };
 
 #endif //PROJECT_EFFECTDECO_H
