@@ -8,6 +8,7 @@
 #include "Enemy.h"
 #include "Potion.h"
 #include "Treasure.h"
+#include "Effectdeco.h"
 #include "Effect.h"
 #include <fstream>
 #include <sstream>
@@ -17,7 +18,8 @@ using namespace std;
 class Stairs;
 class DragonHoard;
 
-Game::Game(int row, int column):level(0),row(row), columne(column){
+Game::Game(int row, int column):row(row), columne(column){
+    level - 0;
     pc = nullptr;
     control = nullptr;
     theFloor = nullptr;
