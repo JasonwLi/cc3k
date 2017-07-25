@@ -18,7 +18,7 @@ class Tile {
         Tile *neighbours[8];
         Component *component;
     public:
-        Tile(int x, int y, int cham);
+        Tile();
         ~Tile();
         Component* getComponent();
         int getRow();
@@ -28,7 +28,7 @@ class Tile {
         void notify(int row, int col, char ch);
         void setComponent(Component *comp);
         void setNeighbours();
-        void setTile( char c, Game *g);
+        void setTile(int x, int y, char c, int ch, Game *g);
         Tile *getNeighbour(int num);
         Tile **getNeighbours();
 };
