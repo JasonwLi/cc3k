@@ -88,6 +88,7 @@ int rngGen(int chance){
     
 void Game::init(string file, Controller* ctrl){
     fstream f(file);
+    control = ctrl;
     theFloor = new Tile*[row];
     for(int z = 0; z < row; z++){
         theFloor[z] = new Tile[column];
@@ -103,7 +104,6 @@ void Game::init(string file, Controller* ctrl){
         f.get();
     }
     f.close();
-    control = ctrl;
 }
 
 void Game::notify(int row, int column, char ch){
