@@ -2,7 +2,7 @@
 #include "Tile.h"
 #include <iostream>
 
-Tile::Tile(int x, int y, int cham): row(x), column(y), chamberNum(cham){
+Tile::Tile(): row(0), column(0), chamberNum(0){
     for(int j = 0; j < 8; j++){
         neighbours[j] = NULL;
     }
@@ -65,7 +65,7 @@ void Tile::setNeighbours(){
     }
 }
 
-void Tile::setTile(char c, Game *g){
+void Tile::setTile(int x, int y, char c, int ch, Game *g){
     ch = c;
     game = g;
     notify(row, column, ch);
